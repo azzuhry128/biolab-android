@@ -1,0 +1,37 @@
+name: biolab_android
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.3.1 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_svg: ^2.0.10+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: font/Montserrat-Bold.ttf
+          weight: 700
+        - asset: font/Montserrat-SemiBold.ttf
+          weight: 600
+        - asset: font/Montserrat-Medium.ttf
+          weight: 500
+        - asset: font/Montserrat-Regular.ttf
+          weight: 400
+
+
+  assets:
+    - assets/icons/
