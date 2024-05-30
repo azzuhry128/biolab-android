@@ -1,4 +1,4 @@
-import 'package:biolab_android/patient/home.dart';
+import 'package:biolab_android/patient/Home.dart';
 import 'package:flutter/material.dart';
 
 void main() {

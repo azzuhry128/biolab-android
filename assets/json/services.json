@@ -1,0 +1,24 @@
+{
+    "services": [
+    {
+        "title": "Service A",
+        "description": "This is Service A"
+    },
+    {
+        "title": "Service B",
+        "description": "This is Service B"
+    },
+    {
+        "title": "Service C",
+        "description": "This is Service C"
+    },
+    {
+        "title": "Service D",
+        "description": "This is Service D"
+    },
+    {
+        "title": "Service E",
+        "description": "This is Service E"
+    }
+    ]
+}

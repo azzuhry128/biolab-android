@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:biolab_android/models/articles_model.dart';
 import 'package:biolab_android/models/navbar_button_model.dart';
+import 'package:biolab_android/patient/ServiceDetail.dart';
 import 'package:biolab_android/patient/order.dart';
 import 'package:biolab_android/patient/settings.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -17,6 +20,13 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   List<ArticlesModel> articles = [];
   List<NavbarButtonModel> navbarButtons = [];
+
+  Future<List<Map<String, dynamic>>> readjson() async {
+    final String response =
+        await rootBundle.loadString('assets/json/services.json');
+    final data = json.decode(response);
+    return data['services'];
+  }
 
   void _getArticles() {
     articles = ArticlesModel.getArticles();
@@ -56,7 +66,7 @@ class _HomeState extends State<Home> {
           const Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              'Services',
+              'layanan kesehatan',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 18,
@@ -64,46 +74,72 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
-          Row(children: [
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Container(
+                margin: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(4),
+                alignment: Alignment.center,
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                child: Center(
+                  child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => ServiceDetail(
+                                title: 'medical checkup',
+                                price: '100000',
+                                description:
+                                    'medical checkup lengkap dengan kualitas pelayanan dan SOP yang baik')));
+                      },
+                      child: Image.asset(
+                        'assets/images/medical-checkup.png',
+                        height: 48,
+                        width: 48,
+                      )),
+                )),
             Container(
               margin: const EdgeInsets.all(10),
               padding: const EdgeInsets.all(4),
               alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: const Color(0xFFD8DEE9),
-                  borderRadius: BorderRadius.circular(10)),
-              child: SvgPicture.asset(
-                'assets/icons/bxs-capsule.svg',
-                height: 48,
-                width: 48,
-              ),
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(10)),
+              child: Center(
+                  child: InkWell(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => ServiceDetail(
+                          title: 'blood sampling',
+                          price: '150000',
+                          description: 'pengujian sampel darah ')));
+                },
+                child: Image.asset(
+                  'assets/images/blood-test.png',
+                  height: 48,
+                  width: 48,
+                ),
+              )),
             ),
             Container(
-              margin: const EdgeInsets.all(10),
-              padding: const EdgeInsets.all(4),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: const Color(0xFFD8DEE9),
-                  borderRadius: BorderRadius.circular(10)),
-              child: SvgPicture.asset(
-                'assets/icons/bxs-injection.svg',
-                height: 48,
-                width: 48,
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.all(10),
-              padding: const EdgeInsets.all(4),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: const Color(0xFFD8DEE9),
-                  borderRadius: BorderRadius.circular(10)),
-              child: SvgPicture.asset(
-                'assets/icons/bx-health.svg',
-                height: 48,
-                width: 48,
-              ),
-            )
+                margin: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(4),
+                alignment: Alignment.center,
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                child: Center(
+                    child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => ServiceDetail(
+                            title: 'post accident care',
+                            price: '200000',
+                            description: 'perawatan medis pasca kecelakaan')));
+                  },
+                  child: Image.asset(
+                    'assets/images/patient.png',
+                    height: 48,
+                    width: 48,
+                  ),
+                ))),
           ])
         ],
       ),
@@ -117,7 +153,7 @@ class _HomeState extends State<Home> {
         const Padding(
           padding: EdgeInsets.only(left: 20),
           child: Text(
-            'articles',
+            'toko obat',
             style: TextStyle(
                 color: Colors.black, fontSize: 18, fontWeight: FontWeight.w600),
           ),
@@ -125,7 +161,7 @@ class _HomeState extends State<Home> {
         const SizedBox(
           height: 12,
         ),
-        Container(
+        SizedBox(
           height: 200,
           child: ListView.separated(
             itemCount: articles.length,
@@ -147,8 +183,7 @@ class _HomeState extends State<Home> {
                     Container(
                       width: 48,
                       height: 48,
-                      decoration: const BoxDecoration(
-                          color: Colors.amber, shape: BoxShape.circle),
+                      decoration: const BoxDecoration(shape: BoxShape.circle),
                       child: SvgPicture.asset(articles[index].iconPath),
                     )
                   ],
@@ -182,7 +217,6 @@ class _HomeState extends State<Home> {
           Container(
               width: 48,
               height: 48,
-              color: Colors.red,
               alignment: Alignment.center,
               child: Center(
                 child: InkWell(
@@ -193,24 +227,22 @@ class _HomeState extends State<Home> {
                   child: SvgPicture.asset('assets/icons/bxs-home-alt-2.svg'),
                 ),
               )),
+          // Container(
+          //     width: 48,
+          //     height: 48,
+          //     alignment: Alignment.center,
+          //     child: Center(
+          //       child: InkWell(
+          //         onTap: () {
+          //           Navigator.of(context)
+          //               .push(MaterialPageRoute(builder: (context) => Order()));
+          //         },
+          //         child: SvgPicture.asset('assets/icons/bxs-book-content.svg'),
+          //       ),
+          //     )),
           Container(
               width: 48,
               height: 48,
-              color: Colors.red,
-              alignment: Alignment.center,
-              child: Center(
-                child: InkWell(
-                  onTap: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => const Order()));
-                  },
-                  child: SvgPicture.asset('assets/icons/bxs-book-content.svg'),
-                ),
-              )),
-          Container(
-              width: 48,
-              height: 48,
-              color: Colors.red,
               alignment: Alignment.center,
               child: Center(
                 child: InkWell(

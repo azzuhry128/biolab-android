@@ -6,22 +6,12 @@ class Setting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(),
-    );
-  }
-
-  AppBar appBar() {
-    return AppBar(
-      title: const Text(
-        'settings page',
-        style: TextStyle(
-            color: Color(0xFFD8DEE9),
-            fontSize: 18,
-            fontWeight: FontWeight.bold),
+      appBar: AppBar(
+        title: const Text('settings'),
       ),
-      backgroundColor: Colors.white,
-      elevation: 0.0,
-      centerTitle: true,
+      body: const Column(
+        children: [],
+      ),
     );
   }
 }
