@@ -21,18 +21,38 @@ class ServiceDetail extends StatelessWidget {
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
-            Padding(
-                padding: const EdgeInsets.only(right: 8, left: 8, bottom: 8),
+            Container(
+                margin: const EdgeInsets.only(right: 8, left: 8, bottom: 8),
+                padding: const EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8.0),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        spreadRadius: 2,
+                        blurRadius: 3,
+                        offset: const Offset(2, 2))
+                  ],
+                ),
                 child: Image.asset(
                   'assets/images/medical-checkup-banner.jpg',
                   fit: BoxFit.contain,
                 )),
             Container(
-              decoration: BoxDecoration(
-                  color: Colors.amber,
-                  borderRadius: BorderRadius.circular(8.0)),
               margin: const EdgeInsets.only(right: 8, left: 8, bottom: 8),
               padding: const EdgeInsets.only(right: 8, left: 8, bottom: 8),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8.0),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.grey.withOpacity(0.2),
+                      spreadRadius: 2,
+                      blurRadius: 3,
+                      offset: const Offset(2, 2))
+                ],
+              ),
               width: double.infinity,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,20 +80,21 @@ class ServiceDetail extends StatelessWidget {
             ),
             SizedBox(
               width: double.infinity,
-              height: 300,
+              height: 500,
               child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          spreadRadius: 2,
-                          blurRadius: 3,
-                          offset: const Offset(2, 2))
-                    ],
-                    borderRadius: BorderRadius.circular(8.0)),
                 margin: const EdgeInsets.only(right: 8, left: 8, bottom: 8),
                 padding: const EdgeInsets.only(right: 8, left: 8, bottom: 8),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8.0),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        spreadRadius: 2,
+                        blurRadius: 3,
+                        offset: const Offset(2, 2))
+                  ],
+                ),
                 width: double.infinity,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,27 +105,32 @@ class ServiceDetail extends StatelessWidget {
                 ),
               ),
             ),
-            TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.amber,
-                ),
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => Order(
-                            username: 'azzuhry',
-                            telephone: '082249034332',
-                            title: title,
-                            payment: 'go pay',
-                            location: 'Trini, RT 03/07, Gamping, Sleman',
-                          )));
-                },
-                child: const Text(
-                  'order now',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: 'Montserrat'),
-                )),
+            Container(
+              margin: const EdgeInsets.all(8.0),
+              child: TextButton(
+                  style: TextButton.styleFrom(
+                      backgroundColor: Colors.amber,
+                      minimumSize: const Size(double.infinity, 48),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0))),
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => Order(
+                              username: 'azzuhry',
+                              telephone: '082249034332',
+                              title: title,
+                              payment: 'go pay',
+                              location: 'Trini, RT 03/07, Gamping, Sleman',
+                            )));
+                  },
+                  child: const Text(
+                    'order now',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: 'Montserrat'),
+                  )),
+            ),
           ],
         ),
       ),

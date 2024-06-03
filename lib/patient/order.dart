@@ -1,7 +1,10 @@
+import 'package:biolab_android/patient/payment.dart';
+import 'package:biolab_android/patient/receipt.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Order extends StatefulWidget {
   final String username;
@@ -133,14 +136,13 @@ class _OrderState extends State<Order> {
               child: Row(
                 children: [
                   Container(
-                      child: Container(
                     padding: const EdgeInsets.all(4.0),
                     child: Image.asset(
                       'assets/images/patient.png',
                       height: 64,
                       width: 64,
                     ),
-                  )),
+                  ),
                   Expanded(
                     child: Container(
                       padding: const EdgeInsets.all(4.0),
@@ -172,6 +174,69 @@ class _OrderState extends State<Order> {
                 ],
               ),
             ),
+            Container(
+                alignment: Alignment.centerLeft,
+                margin: const EdgeInsets.only(left: 8, bottom: 4),
+                child: const Text(
+                  'metode pembayaran',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontFamily: 'Montserrat',
+                      fontSize: 16),
+                )),
+            Container(
+              margin: const EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8.0),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.grey.withOpacity(0.2),
+                      spreadRadius: 2,
+                      blurRadius: 3,
+                      offset: const Offset(2, 2))
+                ],
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(4.0),
+                    child: SvgPicture.asset(
+                      'assets/icons/icons8-mastercard.svg',
+                      height: 64,
+                      width: 64,
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.all(4.0),
+                      child: const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'mastercard',
+                            style: TextStyle(
+                                color: Color(0xffD8DEE9),
+                                fontWeight: FontWeight.w500),
+                          ),
+                          Text('5299 6400 0000 0000',
+                              style: TextStyle(fontWeight: FontWeight.w600)),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(right: 16.0),
+                    child: TextButton(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const payment()));
+                        },
+                        child: const Text('Ubah')),
+                  )
+                ],
+              ),
+            ),
           ],
         ),
         Positioned(
@@ -190,7 +255,10 @@ class _OrderState extends State<Order> {
                       BorderRadius.circular(8.0), // Set the border radius
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => Receipt()));
+              },
               child: const Text(
                 'confirm',
                 style: TextStyle(
